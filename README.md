@@ -148,8 +148,8 @@ The important part is **consistent improvement**.
 
 ## 🔗 Profiles
 
-* 💻 **LeetCode:** [My LeetCode Profile](https://leetcode.com/)
-* 🐙 **GitHub:** [My GitHub Profile](https://github.com/)
+- 💻 **LeetCode:** [Pradeep-Maher223](https://leetcode.com/u/Pradeep-Maher223/)
+- 🐙 **GitHub:** [PradeepMaher](https://github.com/PradeepMaher)
 
 ---
 

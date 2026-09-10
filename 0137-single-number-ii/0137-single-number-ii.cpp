@@ -2,16 +2,13 @@ class Solution {
 public:
     int singleNumber(vector<int>& nums) {
         int n = nums.size();
-        int ans = 0;
-        for(int bi=0; bi<=31; bi++){
-            int count = 0;
-            for(int i=0; i<n; i++){
-                if(nums[i] & (1 << bi)){
-                    count++;
-                }
-            }
-            if(count%3 == 1) ans = ans | (1 << bi);
+
+        sort(nums.begin(), nums.end());
+
+        for(int i=1; i<n; i+=3){
+            if(nums[i] != nums[i-1]) return nums[i-1];
         }
-         return ans;
+        
+        return nums[n-1];
     }
 };

@@ -7,14 +7,10 @@ public:
 
         vector<int> temp1, temp2;
 
-        // Case 1: Exclude the first house
-        // [1 ... n-1]
         for(int i = 1; i < n; i++) {
             temp1.push_back(nums[i]);
         }
 
-        // Case 2: Exclude the last house
-        // [0 ... n-2]
         for(int i = 0; i < n - 1; i++) {
             temp2.push_back(nums[i]);
         }

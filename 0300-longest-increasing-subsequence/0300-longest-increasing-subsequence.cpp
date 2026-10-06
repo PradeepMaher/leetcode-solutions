@@ -1,32 +1,28 @@
 class Solution {
-    int solve(int i, int prev, vector<int>& nums,
-              vector<vector<int>>& dp) {
-
-        if (i == nums.size())
-            return 0;
-
-        if (dp[i][prev + 1] != -1)
-            return dp[i][prev + 1];
-
-        // Not take
-        int notTake = solve(i + 1, prev, nums, dp);
-
-        // Take
-        int take = 0;
-
-        if (prev == -1 || nums[i] > nums[prev]) {
-            take = 1 + solve(i + 1, i, nums, dp);
-        }
-
-        return dp[i][prev + 1] = max(take, notTake);
-    }
-
 public:
     int lengthOfLIS(vector<int>& nums) {
-        int n = nums.size();
+        vector<int> tails;
 
-        vector<vector<int>> dp(n, vector<int>(n + 1, -1));
+    for (int num : nums) {
+        int left = 0;
+        int right = tails.size();
 
-        return solve(0, -1, nums, dp);
+        // lower_bound: first element >= num
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            if (tails[mid] >= num)
+                right = mid;
+            else
+                left = mid + 1;
+        }
+
+        if (left == tails.size())
+            tails.push_back(num);
+        else
+            tails[left] = num;
+    }
+
+    return tails.size();
     }
 };

@@ -1,60 +1,37 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        ListNode* dummy = new ListNode(-1);
+        ListNode* temp = dummy;
 
-        ListNode* head = nullptr;
-        ListNode* tail = nullptr;
+        ListNode* t1 = list1;
+        ListNode* t2 = list2;
 
-        ListNode* temp1 = list1;
-        ListNode* temp2 = list2;
-
-        while (temp1 != nullptr && temp2 != nullptr) {
-            int val;
-
-            if (temp1->val <= temp2->val) {
-                val = temp1->val;
-                temp1 = temp1->next;
-            } else {
-                val = temp2->val;
-                temp2 = temp2->next;
+        while(t1 != NULL && t2 != NULL){
+            if( t1->val < t2->val ){
+                temp->next = t1;
+                t1 = t1->next;
+            }else{
+                temp->next = t2;
+                t2 = t2->next;
             }
 
-            ListNode* newNode = new ListNode(val);
-
-            if (head == nullptr) {
-                head = tail = newNode;
-            } else {
-                tail->next = newNode;
-                tail = tail->next;
-            }
+            temp = temp->next;
         }
 
-        while (temp1 != nullptr) {
-            ListNode* newNode = new ListNode(temp1->val);
+        if(t1 != NULL) temp->next = t1;
+        else temp->next = t2;
 
-            if (head == nullptr) {
-                head = tail = newNode;
-            } else {
-                tail->next = newNode;
-                tail = tail->next;
-            }
-
-            temp1 = temp1->next;
-        }
-
-        while (temp2 != nullptr) {
-            ListNode* newNode = new ListNode(temp2->val);
-
-            if (head == nullptr) {
-                head = tail = newNode;
-            } else {
-                tail->next = newNode;
-                tail = tail->next;
-            }
-
-            temp2 = temp2->next;
-        }
-
-        return head;
+        return dummy->next;
     }
 };

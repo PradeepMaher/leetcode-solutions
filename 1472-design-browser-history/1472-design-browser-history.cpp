@@ -1,31 +1,45 @@
 class BrowserHistory {
-    vector<string> history;
-    int curr;
-    int last;
-
 public:
+    class Node {
+    public:
+        string url;
+        Node* back;
+        Node* forward;
+
+        Node(string value) {
+            url = value;
+            back = NULL;
+            forward = NULL;
+        }
+    };
+
+    Node* curr;
+
     BrowserHistory(string homepage) {
-        history.push_back(homepage);
-        curr = 0;
-        last = 0;
+        curr = new Node(homepage);
     }
 
     void visit(string url) {
-        curr++;
+        Node* newnode = new Node(url);
 
-        history.resize(curr);
-        history.push_back(url);
-
-        last = curr;
+        curr->forward = newnode;
+        newnode->back = curr;
+        curr = newnode;
     }
 
     string back(int steps) {
-        curr = max(0, curr - steps);
-        return history[curr];
+        while (steps > 0 && curr->back != NULL) {
+            curr = curr->back;
+            steps--;
+        }
+        return curr->url;
     }
 
     string forward(int steps) {
-        curr = min(last, curr + steps);
-        return history[curr];
+        while (steps > 0 && curr->forward != NULL) {
+            curr = curr->forward;
+            steps--;
+        }
+        return curr->url;
     }
 };
